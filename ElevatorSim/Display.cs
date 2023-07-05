@@ -94,21 +94,22 @@ namespace ElevatorSim
                     personers[k].currentFloor = elevator.currentFloor;
                 }
             }
-            Thread.Sleep(200);
 
             Console.WriteLine($"Current floor: {elevator.currentFloor}");
             Console.WriteLine($"Target floor: {elevator.targetFloor}");
-            Console.WriteLine($"Total ppl: {elevator.personInside.Count}");
+            Console.WriteLine($"Total ppl waiting: {personers.Where(x => x.state == Personer.State.SAD).Count()}");
+            Console.WriteLine($"Total ppl inside: {elevator.personInside.Count}");
             for (int k = 0; k < elevator.personInside.Count; k++)
             {
-                Console.Write($" P{elevator.personInside[k].currentFloor}-{elevator.personInside[k].targetFloor}");
+                Console.Write($" P{elevator.personInside[k].targetFloor}");
             }
+            Thread.Sleep(10);
 
         }
         public void Move() //Kører elevatoren op eller ned, loader og undloader mennesker
         {
             bool stillIndside; //Til hvis der er stadig nogle inde i elevatoren
-            bool waiting = false;//Til folk der står og venter på elevator
+            bool waiting = true;//Til folk der står og venter på elevator
  
 
             do
@@ -136,7 +137,7 @@ namespace ElevatorSim
                 }
                 
 
-            } while (elevator.personInside.Count != 0 && waiting == false);
+            } while (elevator.personInside.Count != 0 || waiting);
                 
         }
             

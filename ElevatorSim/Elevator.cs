@@ -18,7 +18,7 @@ namespace ElevatorSim
 
         public Elevator(List<Personer> personers) 
         {
-            capacity = 5;
+            capacity = 6;
 
             personInside = new List<Personer>();
 
@@ -62,10 +62,10 @@ namespace ElevatorSim
                 if (personers[i].state == Personer.State.SAD) 
                 {
                     targetFloor = personers[i].currentFloor;
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
 
     }
